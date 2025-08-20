@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crude Oil Price Forecasting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+</head>
+<body>
+    <div class="container">
+        <h1><center><div class="heading-box">OilSight: Crude Oil Price Predictor</div></center></h1>
+        <br><p>Welcome to the Crude Oil Forecasting System. The document below provides detailed instructions on utilizing the software tool for forecasting crude oil prices effectively. Please read the guide thoroughly to understand the features and functionalities of the tool. The information contained herein is intended for both educational, informational and commercial purposes. While we strive to ensure accuracy, the tool's forecasts are based on historical data and may not predict future prices with certainty. The developers assume no responsibility for any financial decisions made based on the forecasts provided by this system</p>
+        <a href="{{ url_for('static', filename='support.html') }}" target="_blank">User Guide</a><br>
+        <!-- <a href="Support.html" target="_blank"> User Guide</a><br><br> -->
+
+        <form method="POST">
+            <br>
+            <h2>Forecasting Crude Oil Prices</h2>
+            <label for="window_size">Select Time Window:</label><br>
+            <input type="number" id="window_size" name="window_size" min="5" max="100" required>
+            <button type="submit" name="forecast">Forecast</button>
+            <button type="submit" formaction="/download">Download CSV</button>
+        </form>
+        
+
+
+        {% if forecast_plot %}
+            <h2>Forecast Plot</h2>
+            <img src="{{ forecast_plot }}" alt="Forecast Plot">
+        {% endif %}
+
+
+        <h2>Historical Trends</h2>
+
+        <form method="POST">
+            <label for="static_plot">Select a Plot:</label>
+            <select id="static_plot" name="static_plot">
+                {% for plot_name, plot_url in static_plots.items() %}
+                    <option value="{{ plot_name }}" {% if plot_name == selected_plot_name %}selected{% endif %}>
+                        {{ plot_name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="static_plot_btn">Show Plot</button>
+        </form>
+        
+        {% if selected_plot %}
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="{{ selected_plot }}" alt="Selected Static Plot">
+            </div>
+        {% endif %}
+
+    </div>
+
+    <div class="footer">
+        <p>For more information or assistance, please contact us at <a href="mailto:support@example.com">support@example.com</a>.</p>
+    </div>
+    
+</body>
+</html>
+

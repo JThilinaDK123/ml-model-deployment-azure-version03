@@ -1,0 +1,8 @@
+Flask
+numpy
+scikit-learn
+scipy
+pandas >= 1.3.6
+matplotlib
+seaborn
+gunicorn

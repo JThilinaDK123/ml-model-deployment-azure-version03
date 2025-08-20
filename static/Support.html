@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crude Oil Price Forecasting Tool - User Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            margin: 40px;
+            text-align: justify;
+            color: #333;
+            background-color: #f4f4f9;
+        }
+        h1, h2, h3 {
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        ul {
+            margin-left: 20px;
+            list-style: disc;
+        }
+        .content {
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 30px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #555;
+            text-align: center;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="content">
+    <h1>User Guide: Crude Oil Price Forecasting Tool</h1>
+
+    <p>Welcome to the Crude Oil Price Forecasting Tool. This guide will help you understand how to use the tool effectively. If you need further assistance, please don't hesitate to contact us at <a href="mailto:support@example.com">support@example.com</a>.</p>
+
+    <h2>Features</h2>
+    <ul>
+        <li><strong>Forecast Up to 100 Days:</strong> The tool allows you to forecast crude oil prices for up to 100 upcoming days, starting from October 10, 2023.</li>
+        <li><strong>Historical Trends:</strong> You can see historical trends in crude oil prices for the below-mentioned scenarios. (Note that the display plots only represent the original data and the data after applying a fixed price threshold.)</li>
+        <ul>
+            <li> Historical Crude Oil Prices</li>
+            <li> Fixed Price Threshold (Damping Scheme)</li>
+            <li> Fixed Price Threshold (Mean Replacement)</li>
+            <li> Fixed Price Threshold (Median Replacement)</li>
+            <li> Fixed Price Threshold (Threshold Scheme)</li>
+        </ul>
+    </ul>
+
+    <h2>Extreme Value Detection Techniques</h2>
+    <p>The tool utilizes five advanced techniques to detect extreme values in the data:</p>
+
+    <h3>1. Fixed Price Threshold (FPT)</h3>
+    <p>The FPT method sets a threshold value, and any value beyond this limit is classified as a spike. This is one of the oldest techniques in time series analysis. The spike is represented as:</p>
+    <p>\[ Y_t^0 = \{Y_t : Y_t \geq a_1\} \]</p>
+
+    <h3>2. Standard Deviation Filter on Prices (SFP)</h3>
+    <p>The SFP method classifies a value as a spike if the absolute difference between the actual value and the mean value exceeds a specific standard deviation value. Typically, 3 standard deviations are used. The spike is represented as:</p>
+    <p>\[ Y_t^0 = \{Y_t : |Y_t - \overline{Y}| \geq 3\sigma\} \]</p>
+
+    <h3>3. Moving Window Filter on Prices (MFP)</h3>
+    <p>The MFP method applies a rolling window to the time series data and uses a similar approach as the SFP method. The spike is represented as:</p>
+    <p>\[ Y_t^o = \bigcup_{n=1,2,\ldots,N} \left\{ Y_{(\tau,\alpha)} : |Y_{(\tau_\alpha)}- \overline{Y} | \geq 1.96\sigma_n \right\} \]</p>
+
+    <h3>4. Recursive Filter on Prices (RFP)</h3>
+    <p>The RFP method repeats the standard deviation filtering procedure until no spikes remain.</p>
+
+    <h3>5. Percentage Price Filter (PFP)</h3>
+    <p>The PFP method identifies spikes based on quantile values, typically using the 2.5th and 97.5th percentiles. The spike is represented as:</p>
+    <p>\[ Y_t^0 = \{Y_t : Y_t \leq Y_t^{(2.5/100)} \} \cup \{Y_t : Y_t \geq Y_t^{(97.5/100)}\} \]</p>
+
+    <h2>Extreme Value Replacement Techniques</h2>
+    <p>Once extreme values are detected, they are replaced using one of the following four techniques:</p>
+
+    <h3>1. Mean Value Replacement</h3>
+    <p>This method replaces all detected spikes with the mean value of the entire dataset.</p>
+
+    <h3>2. Median Value Replacement</h3>
+    <p>This method replaces all detected spikes with the median value of the entire dataset.</p>
+
+    <h3>3. Damping Scheme</h3>
+    <p>This technique is less commonly used but is applied in this study. It uses a specific damping function to replace extreme values.</p>
+
+    <h3>4. Threshold Scheme</h3>
+    <p>This method replaces extreme values by taking the average of the mean and the median of the entire dataset.</p>
+
+    <h2>Best Model Selection</h2>
+    <p>For optimal forecasting, the best model was chosen based on the dataset treated with the Fixed Price Threshold (FPT) technique in combination with the Damping scheme. All the forecasts generated by this tool are based on this carefully selected model, ensuring the highest accuracy and reliability in predictions.</p>
+
+    <div class="footer">
+        <p>For more information or assistance, please contact us at <a href="mailto:support@example.com">support@example.com</a>.</p>
+    </div>
+</div>
+
+</body>
+</html>
