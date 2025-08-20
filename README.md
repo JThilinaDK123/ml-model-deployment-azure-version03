@@ -1,5 +1,5 @@
 
-# Deploy LSTN Model in Azure
+# Deploy LSTM Model in Azure
 
 In this project, I will build and deploy a LSTM model using the crude oil price dataset to forecast crude oil price for a given time window.
 
